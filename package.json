@@ -1,20 +1,20 @@
 {
-  "dependencies": {
-    "express": "^4.19.2"
-  },
   "name": "bank-express",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "",
   "type": "module",
-  "devDependencies": {
-    "dev": "node --watch ./index.js",
-    "dead-server": "^1.0.9"
-  },
+  "main": "index.js",
   "scripts": {
+    "dev": "node --watch ./index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "Giedre",
+  "author": "",
   "license": "ISC",
-  "description": ""
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "dead-server": "^1.0.9"
+  }
 }
