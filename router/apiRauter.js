@@ -29,7 +29,7 @@ apiRouter.get('/bank/account', (req, res) => {
 
 const users = [];
 
-apiRouter.get('/bank/acount', (req, res) => {
+apiRouter.get('/bank/account', (req, res) => {
     return res.json(users);
 });
 
@@ -38,6 +38,6 @@ apiRouter.post('/acount', (req, res) => {
 
     return res.json({
         state: 'success',
-        message: 'Vardas pridėtas',
+        message: 'Vardas, pavardė ir gimimo data pridėta.',
     });
 });
