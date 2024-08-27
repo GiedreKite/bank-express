@@ -10,3 +10,11 @@ apiRouter.get('/', (req, res) => {
     };
     return res.json(data);
 });
+
+apiRouter.get('/bankas', (req, res) => {
+    const data = {
+        state: 'success',
+        message: 'Jūs užėjote į banką.',
+    };
+    return res.json(data);
+});
