@@ -14,7 +14,7 @@ apiRouter.get('/', (req, res) => {
 apiRouter.get('/bankas', (req, res) => {
     const data = {
         state: 'success',
-        message: 'Jūs užėjote į banką.',
+        message: 'Jūs užėjote į Giedrės Narvilaitės Banką.',
     };
     return res.json(data);
 });
