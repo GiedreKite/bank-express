@@ -11,10 +11,33 @@ apiRouter.get('/', (req, res) => {
     return res.json(data);
 });
 
-apiRouter.get('/bankas', (req, res) => {
+apiRouter.get('/bank', (req, res) => {
     const data = {
         state: 'success',
         message: 'Jūs užėjote į Giedrės Narvilaitės Banką.',
     };
     return res.json(data);
+});
+
+apiRouter.get('/bank/account', (req, res) => {
+    const data = {
+        state: 'success',
+        message: 'Jūs esate Giedrės Narvilaitės banke ir jame galite susikurti sąskatą.',
+    };
+    return res.json(data);
+});
+
+const users = [];
+
+apiRouter.get('/bank/acount', (req, res) => {
+    return res.json(users);
+});
+
+apiRouter.post('/acount', (req, res) => {
+    users.push(req.body.acount);
+
+    return res.json({
+        state: 'success',
+        message: 'Vardas pridėtas',
+    });
 });
