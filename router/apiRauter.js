@@ -24,7 +24,13 @@ apiRouter.post('/account', (req, res) => {
     users.push(req.body);
     console.log(JSON.stringify(users))
     console.log(req.body)
-    // var req_body=JSON.parse(req.body)
+    
+
+    //post - body
+
+    // get - params
+
+    
     console.log(req.body.name)
     const name = req.body.name;
     const surname = req.body.surname;
