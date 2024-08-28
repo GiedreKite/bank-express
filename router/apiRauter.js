@@ -27,13 +27,20 @@ apiRouter.post('/account', (req, res) => {
     const yearOfBirth = req.params.yearOfBirth;
     const monthOfBirth = req.params.monthOfBirth;
     const dayOfBirth = req.params.dayOfBirth;
-   if(name.trim() === ''){
+   if(name === ''){
     return res.json({
         state: 'error',
         message: 'Vardas turi būti įrašytas',
     });
 }
-    if(surname.trim() === ''){
+if(name+surname === name+surname){
+    return res.json({
+        state: 'error',
+        message: 'Vardas ir pavardė jau užregistruoti, negali kartotis. ',
+    });
+}
+
+    if(surname === ''){
         return res.json({
             state: 'error',
             message: 'Parardė turi būti įrašyta',
