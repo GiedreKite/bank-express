@@ -1,7 +1,7 @@
 import express from 'express';
 
 
-export const apiRouter = express.Router();
+export const apiRouter = express.Router({mergeParams:true,});
 
 
 
@@ -73,4 +73,15 @@ if(name+surname === name+surname){
     });
 
 });
+
+
+apiRouter.get('/account/req.params.name-req.params.surname', (req, res) => {
+    if ((req.params.name.toLowerCase() && req.params.surname.toLowerCase()).to) {
+
+
+    }    
+    return res.json(users);
+});
+
+
 
