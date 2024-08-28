@@ -143,3 +143,6 @@ Kiekvienas endpoint'as ir jo HTTP metodai yra verti po 5 balus:
 1 balas uz gerai aprasyta dokumentacija README faile
 Deadline
 2024-09-02 12:00:00
+
+
+Done:

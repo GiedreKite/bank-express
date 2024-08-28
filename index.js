@@ -11,6 +11,8 @@ app.use(express.urlencoded({ extended: true }))
 
 
 app.use('/api',apiRouter);
+app.use('/api/acount',apiRouter);
+app.use('/api',apiRouter);
 
 app.get('*', (req, res) => {
     return res.send('Ups... 404 page 🛸');
