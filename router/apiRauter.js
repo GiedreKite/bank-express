@@ -21,12 +21,16 @@ apiRouter.get('/account', (req, res) => {
 });
 
 apiRouter.post('/account', (req, res) => {
-    users.push(req.body.account);
-    const name = req.params.name;
-    const surname = req.params.surname;
-    const yearOfBirth = req.params.yearOfBirth;
-    const monthOfBirth = req.params.monthOfBirth;
-    const dayOfBirth = req.params.dayOfBirth;
+    users.push(req.body);
+    console.log(JSON.stringify(users))
+    console.log(req.body)
+    // var req_body=JSON.parse(req.body)
+    console.log(req.body.name)
+    const name = req.body.name;
+    const surname = req.body.surname;
+    const yearOfBirth = req.body.yearOfBirth;
+    const monthOfBirth = req.body.monthOfBirth;
+    const dayOfBirth = req.body.dayOfBirth;
    if(name === ''){
     return res.json({
         state: 'error',
@@ -75,13 +79,26 @@ if(name+surname === name+surname){
 });
 
 
-apiRouter.get('/account/req.params.name-req.params.surname', (req, res) => {
-    if ((req.params.name.toLowerCase() && req.params.surname.toLowerCase()).to) {
+apiRouter.get('/account/:name-surname', (req, res) => {
+    const name = req.params.name.toLowerCase();
+    const surname = req.params.surname.toLowerCase();
+    const userName = name.join('-').join(surname)
 
+    let user = null;
 
-    }    
-    return res.json(users);
+    for (const key in users) {
+        if (key === userName) {
+            users = user[key];
+            break;
+        }
+    }
+
+    if (user) {
+        return res.send(`Vartotojo vardas ${users.name}, pavardė ${users.surname} ir jis yra gimęs  ${users.yearOfBirth} metais, ${users.monthOfBirth} mėnesį ir ${users.dayOfBirth} dieną`);
+    } else {
+        return res.send(`Vartotojo, vardu ${req.params.name} nera.`);
+    }
+  
 });
-
 
 
