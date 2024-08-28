@@ -21,7 +21,49 @@ apiRouter.get('/account', (req, res) => {
 });
 
 apiRouter.post('/account', (req, res) => {
-    users.push(req.body);
+        if(name === ''){
+            return res.json({
+                state: 'error',
+                message: 'Vardas turi būti įrašytas',
+            });
+        }
+        //TODO: Padaryti tikrinima visu esamu users
+        // if(name+surname === name+surname){
+        //     return res.json({
+        //         state: 'error',
+        //         message: 'Vardas ir pavardė jau užregistruoti, negali kartotis. ',
+        //     });
+        // }
+        
+        if(surname === ''){
+            return res.json({
+                state: 'error',
+                message: 'Parardė turi būti įrašyta',
+            });
+        }
+        if(yearOfBirth >= 2006){
+            return res.json({
+                state: 'error',
+                message: 'Metai, kuriais gimė, asmuo negali būti sulaukęs pilnametystės',
+            });
+        }
+        if(monthOfBirth >= 8){
+            return res.json({
+                state: 'error',
+                message: 'Mėnuo, kurį gimė, asmuo negali būti sulaukęs pilnametystės',
+            });
+            
+        }
+    
+        if(dayOfBirth >= 28){
+            return res.json({
+                state: 'error',
+                message: 'Diena, kurią gimė, asmuo negali būti sulaukęs pilnametystės',
+            });
+            
+        }
+    // users.push(req.body);
+    users[req.body.name+'-'+req.body.surname]=req.body;
     console.log(JSON.stringify(users))
     console.log(req.body)
     
@@ -30,53 +72,14 @@ apiRouter.post('/account', (req, res) => {
 
     // get - params
 
-    
+
     console.log(req.body.name)
     const name = req.body.name;
     const surname = req.body.surname;
     const yearOfBirth = req.body.yearOfBirth;
     const monthOfBirth = req.body.monthOfBirth;
     const dayOfBirth = req.body.dayOfBirth;
-   if(name === ''){
-    return res.json({
-        state: 'error',
-        message: 'Vardas turi būti įrašytas',
-    });
-}
-if(name+surname === name+surname){
-    return res.json({
-        state: 'error',
-        message: 'Vardas ir pavardė jau užregistruoti, negali kartotis. ',
-    });
-}
-
-    if(surname === ''){
-        return res.json({
-            state: 'error',
-            message: 'Parardė turi būti įrašyta',
-        });
-    }
-    if(yearOfBirth >= 2006){
-        return res.json({
-            state: 'error',
-            message: 'Metai, kuriais gimė, asmuo negali būti sulaukęs pilnametystės',
-        });
-    }
-    if(monthOfBirth >= 8){
-        return res.json({
-            state: 'error',
-            message: 'Mėnuo, kurį gimė, asmuo negali būti sulaukęs pilnametystės',
-        });
-        
-    }
-
-    if(dayOfBirth >= 28){
-        return res.json({
-            state: 'error',
-            message: 'Diena, kurią gimė, asmuo negali būti sulaukęs pilnametystės',
-        });
-        
-    }
+   
     return res.json({
         state: 'success',
         message: 'Vardas, pavardė ir gimimo data pridėta.',
@@ -85,16 +88,18 @@ if(name+surname === name+surname){
 });
 
 
-apiRouter.get('/account/:name-surname', (req, res) => {
+apiRouter.get('/account/:name-:surname', (req, res) => {
     const name = req.params.name.toLowerCase();
     const surname = req.params.surname.toLowerCase();
-    const userName = name.join('-').join(surname)
-
+    const userName = name+'-'+surname
+    console.log(userName)
+    console.log(name+'-'+surname)
+    console.log(users)
     let user = null;
 
     for (const key in users) {
-        if (key === userName) {
-            users = user[key];
+        if (key.name+'-'+key.surname === userName) {
+            user = key;
             break;
         }
     }
