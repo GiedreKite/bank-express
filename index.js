@@ -8,11 +8,10 @@ app.use(express.json())
 // for parsing application/json
 app.use(express.urlencoded({ extended: true })) 
 // for parsing application/x-www-form-urlencoded
-
+app.use(express.static('public'));
 
 app.use('/api',apiRouter);
-app.use('/api/acount',apiRouter);
-app.use('/api',apiRouter);
+
 
 app.get('*', (req, res) => {
     return res.send('Ups... 404 page 🛸');

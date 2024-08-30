@@ -1,10 +1,11 @@
-apiRouter.get('/', (req, res) => {
-    const data = {
-        state: 'success',
-        message: 'Jūs užėjote į Giedrės Narvilaitės Banką.',
-    };
-    return res.json(data);
-});
+import express from 'express';
+
+
+export const apiRouter = express.Router({mergeParams:true,});
+
+
+export function get() {
+    
 
 
 const users = [];
@@ -13,3 +14,4 @@ apiRouter.get('/account', (req, res) => {
     return res.json(users);
 });
 
+}

@@ -1,3 +1,8 @@
+import express from 'express';
+
+
+export const apiRouter = express.Router({mergeParams:true,});
+
 
 
 apiRouter.post('/account', (req, res) => {
