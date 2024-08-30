@@ -7,7 +7,8 @@ Perduodami duomenys:
 	"surname": "Narvilaitė",
 	"yearOfBirth": 1988,
 	"monthOfBirth": 5,
-	"dayOfBirth": 12
+	"dayOfBirth": 12,
+	"balance":0
 	
 }
 
