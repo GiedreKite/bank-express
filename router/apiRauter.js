@@ -100,20 +100,18 @@ const d = date.getDate();
             });
         }
    
-    // users.push(req.body);
+
+        if (balance !== 0) {
+            return res.json({
+                status: 'error',
+                message: 'Sukuriant sąskaitą, sąskaitos balansas turi būti lygus 0',
+            });
+        }
     users[req.body.name+'-'+req.body.surname]=req.body;
-    console.log(JSON.stringify(users))
-    console.log(req.body)
-    console.log(users)
+    // console.log(JSON.stringify(users))
+    // console.log(req.body)
+    // console.log(users)
     
-
-    //post - body
-
-    // get - params
-
-
-
-   
     return res.json({
         state: 'success',
         message: 'Vardas, pavardė ir gimimo data pridėta.',
@@ -122,13 +120,19 @@ const d = date.getDate();
 });
 
 
+    //post - body
+
+    // get - params
+
 apiRouter.get('/account/:name-:surname', (req, res) => {
     const name = req.params.name.toLowerCase();
     const surname = req.params.surname.toLowerCase();
-    const userName = name+'-'+surname
+    const userName = name+'-'+surname;
+    const names = Object.values(users).map(user => userName);
     console.log(userName)
-    console.log(name+'-'+surname)
-    console.log(users)
+    console.log(names)
+    console.log(names[0])
+
     let user = null;
 
     for (const key in users) {
@@ -137,12 +141,14 @@ apiRouter.get('/account/:name-:surname', (req, res) => {
             break;
         }
     }
+ 
 
-    if (user) {
+    if (names[0] === userName) {
         return res.send(`Vartotojo vardas ${users.name}, pavardė ${users.surname} ir jis yra gimęs  ${users.yearOfBirth} metais, ${users.monthOfBirth} mėnesį ir ${users.dayOfBirth} dieną`);
     } else {
         return res.send(`Vartotojo, vardu ${req.params.name} nera.`);
     }
+   
   
 });
 
