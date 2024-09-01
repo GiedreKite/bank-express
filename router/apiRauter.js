@@ -127,10 +127,7 @@ const d = date.getDate();
 });
 
 
-    //post - body
-
-    // get - params
-
+ 
 apiRouter.get('/account/:name-:surname', (req, res) => {
     const name = req.params.name.toLowerCase();
     const surname = req.params.surname.toLowerCase();
@@ -166,11 +163,7 @@ apiRouter.get('/account/:name-:surname', (req, res) => {
     console.log(monthOfBirthObj);
     console.log(dayOfBirthObj);
     console.log(balanceObj);
-  
-    
-    
-
-    
+      
     if (names[0] === userName) {
 return res.send(`Vartotojo vardas ${nameObj}, pavardė ${surnameObj} ir jis yra gimęs  ${yearOfBirthObj} metais, ${monthOfBirthObj} mėnesį ir ${dayOfBirthObj} dieną`);
     } else {
@@ -180,6 +173,27 @@ return res.send(`Vartotojo vardas ${nameObj}, pavardė ${surnameObj} ir jis yra 
   
 });
 
+
+apiRouter.delete('/account/:name-:surname', (req, res) => {
+    const position = users;
+    const data = users;
+    const balanceObj = data['Giedrė-Narvilaitė'].balance;
+    console.log(balanceObj);
+
+    if (balanceObj !== 0 ) {
+        return res.json({
+            state: 'error',
+            message: 'Sąskaitoje negali būti pinigų, jei norite ją ištrinti.',
+        });
+    }
+    users.splice(position, 1);
+
+    return res.json({
+        state: 'success',
+        message: 'Vartotojas ištrintas',
+    });
+});
+
         //TODO: Padaryti tikrinima visu esamu users
         // if(name+surname === name+surname){
         //     return res.json({
@@ -187,3 +201,6 @@ return res.send(`Vartotojo vardas ${nameObj}, pavardė ${surnameObj} ir jis yra 
         //         message: 'Vardas ir pavardė jau užregistruoti, negali kartotis. ',
         //     });
         // }
+
+        
+    //post - body

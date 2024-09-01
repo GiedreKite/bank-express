@@ -17,39 +17,18 @@ Sukurti API naudojantis Express.js, kuris leistu susikurti banko saskaitas, i ja
 
 Vienas asmuo gali tureti tik viena saskaita.
 
-Visi pinigai yra ta pacia valiuta.
-
-Visi duomenu mainai vyksta JSON formatu.
-
 Visi pinigu mainai vyksta centais.
 
 Visi pinigu "spausdinimai" vykdomi formatuojant teksta, pvz: 123,45 Eur.
 
 Uzklausu adresai neturi buti jautrus didziosioms/mazosioms raidems, t.y.
 
-/api/account/{vardas}-{pavarde}
-/api/account/john-doe
-/api/account/John-doe
-/api/account/John-Doe
-/api/account/JOHN-DOE
-Reikalingi API endpoint'ai
-/api/account
+
 POST
 
 /api/account
-Perduodami duomenys:
-
-vardas
-pavarde
-gimimo data (yyyy-mm-dd)
-Reikalavimai:
-
-saskaita gali susikurti tik pilnameciai (18m)
 vardo ir pavardes kombinacija turi buti unikali
-GET:
 
-/api/account/john-doe
-Grazina paskyros savininko varda, pavarde ir gimimo data
 
 DELETE:
 
@@ -57,6 +36,7 @@ DELETE:
 Reikalavimai:
 
 istrinti galima tik jei saskaitoje nera pinigu
+
 PUT
 
 /api/account/john-doe
