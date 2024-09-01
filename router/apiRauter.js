@@ -43,6 +43,13 @@ apiRouter.post('/account', (req, res) => {
             message: 'Netinkamas duomenų tipas, turi būti objektas',
         });
 }
+// if ((name+'-'+surname) === (users.name+'-'+users.surname)) {
+//     return res.json({
+//         status: 'error',
+//         message:' Vartotojas jau yra užregistruotas',
+//     });
+
+// }
     const nameError = nameCheck(name);
     if (nameError !== '') {
         return res.json({
@@ -142,9 +149,30 @@ apiRouter.get('/account/:name-:surname', (req, res) => {
         }
     }
  
+    console.log(users.name)
+    console.log({users}.name)
+    console.log(users)
 
+    const data = users;
+    const nameObj = data['Giedrė-Narvilaitė'].name;
+    const surnameObj = data['Giedrė-Narvilaitė'].surname;
+    const yearOfBirthObj = data['Giedrė-Narvilaitė'].yearOfBirth
+    const monthOfBirthObj = data['Giedrė-Narvilaitė'].monthOfBirth
+    const dayOfBirthObj = data['Giedrė-Narvilaitė'].dayOfBirth    
+    const balanceObj = data['Giedrė-Narvilaitė'].balance;
+    console.log(nameObj);
+    console.log(surnameObj);
+    console.log(yearOfBirthObj);
+    console.log(monthOfBirthObj);
+    console.log(dayOfBirthObj);
+    console.log(balanceObj);
+  
+    
+    
+
+    
     if (names[0] === userName) {
-        return res.send(`Vartotojo vardas ${users.name}, pavardė ${users.surname} ir jis yra gimęs  ${users.yearOfBirth} metais, ${users.monthOfBirth} mėnesį ir ${users.dayOfBirth} dieną`);
+return res.send(`Vartotojo vardas ${nameObj}, pavardė ${surnameObj} ir jis yra gimęs  ${yearOfBirthObj} metais, ${monthOfBirthObj} mėnesį ir ${dayOfBirthObj} dieną`);
     } else {
         return res.send(`Vartotojo, vardu ${req.params.name} nera.`);
     }
