@@ -1,7 +1,9 @@
 import express from 'express';
 import {nameCheck} from './validations/nameCheck.js';
 import {surnameCheck} from './validations/surnameCheck.js';
-import {yearOfBirthCheck} from './validations/yearCheck.js'
+import {yearOfBirthCheck} from './validations/yearCheck.js';
+import {monthOfBirthCheck} from './validations/monthCheck.js';
+import {dayOfBirthCheck} from './validations/dayCheck.js';
 
 export const apiRouter = express.Router({mergeParams:true,});
 
@@ -62,6 +64,20 @@ if (yearOfBirthError !== '') {
         message: yearOfBirthError,
     });
 }
+// const monthOfBirthError = monthOfBirthCheck(monthOfBirth);
+// if (monthOfBirthError !== '') {
+//     return res.json({
+//         status: 'error',
+//         message: monthOfBirthError,
+//     });
+// }
+// const dayOfBirthError = dayOfBirthCheck(dayOfBirth);
+// if (dayOfBirthError !== '') {
+//     return res.json({
+//         status: 'error',
+//         message: dayOfBirthError,
+//     });
+// }
 
 
 
