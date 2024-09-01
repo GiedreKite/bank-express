@@ -56,20 +56,9 @@ if (nameError !== '') {
 }
 
 
-        //TODO: Padaryti tikrinima visu esamu users
-        // if(name+surname === name+surname){
-        //     return res.json({
-        //         state: 'error',
-        //         message: 'Vardas ir pavardė jau užregistruoti, negali kartotis. ',
-        //     });
-        // }
+
         
-        if(surname === ''){
-            return res.json({
-                state: 'error',
-                message: 'Parardė turi būti įrašyta',
-            });
-        }
+
         if(yearOfBirth >= 2006){
             return res.json({
                 state: 'error',
@@ -138,4 +127,10 @@ apiRouter.get('/account/:name-:surname', (req, res) => {
   
 });
 
-
+        //TODO: Padaryti tikrinima visu esamu users
+        // if(name+surname === name+surname){
+        //     return res.json({
+        //         state: 'error',
+        //         message: 'Vardas ir pavardė jau užregistruoti, negali kartotis. ',
+        //     });
+        // }
