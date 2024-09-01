@@ -82,20 +82,21 @@ if (dayOfBirthError !== '') {
 const date = new Date();
 const y = date.getFullYear();
 const m = (date.getMonth() < 9 ? '0' : '') + (date.getMonth() + 1);
-const d = (date.getDate() < 10 ? '0' : '') + date.getDate();
-const maxDate = `${y}-${m}-${d}`;
+const d = date.getDate();
+// const alowedDay = (year, month) => new Date(year, month, 0).getDate(yearOfBirth, monthOfBirth);
+
         
-if(yearOfBirth >= y-18 && monthOfBirth >= m && dayOfBirth> d){
-    return res.json({
-        state: 'error',
-        message: 'Nepilnametis negali susikurti s1skaitos banke',
-    });
-}
+// if(!alowedDay>dayOfBirth){
+//     return res.json({
+//         state: 'error',
+//         message: 'Mėnuo neturi tokios dienos.',
+//     });
+// }
 
         if(yearOfBirth >= y-18 && monthOfBirth >= m && dayOfBirth> d){
             return res.json({
                 state: 'error',
-                message: 'Nepilnametis negali susikurti s1skaitos banke',
+                message: 'Nepilnametis negali susikurti sąskaitos banke',
             });
         }
    
@@ -103,6 +104,7 @@ if(yearOfBirth >= y-18 && monthOfBirth >= m && dayOfBirth> d){
     users[req.body.name+'-'+req.body.surname]=req.body;
     console.log(JSON.stringify(users))
     console.log(req.body)
+    console.log(users)
     
 
     //post - body
@@ -110,7 +112,6 @@ if(yearOfBirth >= y-18 && monthOfBirth >= m && dayOfBirth> d){
     // get - params
 
 
-    console.log(req.body.name)
 
    
     return res.json({
