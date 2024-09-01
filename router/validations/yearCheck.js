@@ -1,14 +1,11 @@
 
 export function yearOfBirthCheck(str) {
 
-    
     const date = new Date();
     const y = date.getFullYear();
 
-
     const yearOfBirthMinSize = 1900;
     const yearOfBirthMaxSize = (y-18);
-    const yearOfBirthAllowed = '0123456789';
     let errorMessage = '';
 
     if (typeof str !== 'number') {

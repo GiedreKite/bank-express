@@ -64,48 +64,41 @@ if (yearOfBirthError !== '') {
         message: yearOfBirthError,
     });
 }
-// const monthOfBirthError = monthOfBirthCheck(monthOfBirth);
-// if (monthOfBirthError !== '') {
-//     return res.json({
-//         status: 'error',
-//         message: monthOfBirthError,
-//     });
-// }
-// const dayOfBirthError = dayOfBirthCheck(dayOfBirth);
-// if (dayOfBirthError !== '') {
-//     return res.json({
-//         status: 'error',
-//         message: dayOfBirthError,
-//     });
-// }
+const monthOfBirthError = monthOfBirthCheck(monthOfBirth);
+if (monthOfBirthError !== '') {
+    return res.json({
+        status: 'error',
+        message: monthOfBirthError,
+    });
+}
+const dayOfBirthError = dayOfBirthCheck(dayOfBirth);
+if (dayOfBirthError !== '') {
+    return res.json({
+        status: 'error',
+        message: dayOfBirthError,
+    });
+}
 
-
-
-// nepilnameciai dar praeina!!!
+const date = new Date();
+const y = date.getFullYear();
+const m = (date.getMonth() < 9 ? '0' : '') + (date.getMonth() + 1);
+const d = (date.getDate() < 10 ? '0' : '') + date.getDate();
+const maxDate = `${y}-${m}-${d}`;
         
+if(yearOfBirth >= y-18 && monthOfBirth >= m && dayOfBirth> d){
+    return res.json({
+        state: 'error',
+        message: 'Nepilnametis negali susikurti s1skaitos banke',
+    });
+}
 
-        if(yearOfBirth >= 2006){
+        if(yearOfBirth >= y-18 && monthOfBirth >= m && dayOfBirth> d){
             return res.json({
                 state: 'error',
-                message: 'Metai, kuriais gimė, asmuo negali būti sulaukęs pilnametystės',
+                message: 'Nepilnametis negali susikurti s1skaitos banke',
             });
         }
-        if(monthOfBirth >= 8){
-            return res.json({
-                state: 'error',
-                message: 'Mėnuo, kurį gimė, asmuo negali būti sulaukęs pilnametystės',
-            });
-            
-        }
-    
-        if(dayOfBirth >= 28){
-            return res.json({
-                state: 'error',
-                message: 'Diena, kurią gimė, asmuo negali būti sulaukęs pilnametystės',
-            });
-            
-            
-        }
+   
     // users.push(req.body);
     users[req.body.name+'-'+req.body.surname]=req.body;
     console.log(JSON.stringify(users))
