@@ -65,7 +65,7 @@ if (yearOfBirthError !== '') {
 
 
 
-
+// nepilnameciai dar praeina!!!
         
 
         if(yearOfBirth >= 2006){
