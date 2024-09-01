@@ -5,7 +5,7 @@ export const apiRouter = express.Router({mergeParams:true,});
 
 
 
-apiRouter.get('/', (req, res) => {
+apiRouter.get('/bank', (req, res) => {
     const data = {
         state: 'success',
         message: 'Jūs užėjote į Giedrės Narvilaitės Banką.',
@@ -17,9 +17,13 @@ apiRouter.get('/', (req, res) => {
 const users = [];
 
 apiRouter.get('/account', (req, res) => {
-    return res.json(users);
+
+
+
+return res.json(users);
 });
-export function accountPost(req, res) {
+
+apiRouter.post('/account', (req, res) => {
     const name = req.body.name;
     const surname = req.body.surname;
     const yearOfBirth = req.body.yearOfBirth;
@@ -42,15 +46,8 @@ export function accountPost(req, res) {
             message: nameError,
         });
 }
-}
 
-apiRouter.post('/account', (req, res) => {
-        if(name === ''){
-            return res.json({
-                state: 'error',
-                message: 'Vardas turi būti įrašytas',
-            });
-        }
+
         //TODO: Padaryti tikrinima visu esamu users
         // if(name+surname === name+surname){
         //     return res.json({
