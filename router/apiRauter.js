@@ -43,6 +43,8 @@ apiRouter.post('/account', (req, res) => {
             message: 'Netinkamas duomenų tipas, turi būti objektas',
         });
 }
+if (name === surname) {
+    errorMessage = 'Vardas ir pavardė negali sutapti';}
 // if ((name+'-'+surname) === (users.name+'-'+users.surname)) {
 //     return res.json({
 //         status: 'error',
@@ -173,26 +175,40 @@ return res.send(`Vartotojo vardas ${nameObj}, pavardė ${surnameObj} ir jis yra 
   
 });
 
+// apiRouter.put('/account/:name-:surname', (req, res) => {
 
-apiRouter.delete('/account/:name-:surname', (req, res) => {
-    const position = users;
-    const data = users;
-    const balanceObj = data['Giedrė-Narvilaitė'].balance;
-    console.log(balanceObj);
+//     return res.json({
+//         status: 'success',
+//         message: 'Siuo metu nera galimybes atnaujinti paskyros informacijos',
+//     });
+// });
 
-    if (balanceObj !== 0 ) {
-        return res.json({
-            state: 'error',
-            message: 'Sąskaitoje negali būti pinigų, jei norite ją ištrinti.',
-        });
-    }
-    users.splice(position, 1);
 
-    return res.json({
-        state: 'success',
-        message: 'Vartotojas ištrintas',
-    });
-});
+// apiRouter.delete('/account/:name-:surname', (req, res) => {
+//     const { index } = req.params;
+//     const position = parseFloat(index);
+//     const data = users;
+//     const balanceObj = data['Giedrė-Narvilaitė'].balance;
+//     console.log(balanceObj);
+
+//     if (balanceObj !== 0 ) {
+//         return res.json({
+//             state: 'error',
+//             message: 'Sąskaitoje negali būti pinigų, jei norite ją ištrinti.',
+//         });
+//     }
+//     console.log(index)
+//     console.log(position)
+//     console.log(users.splice(position, 1))
+//     users.splice(index, 1);
+
+//     return res.json({
+//         state: 'success',
+//         message: 'Vartotojas ištrintas',
+//     });
+// });
+
+
 
         //TODO: Padaryti tikrinima visu esamu users
         // if(name+surname === name+surname){
