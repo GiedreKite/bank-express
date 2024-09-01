@@ -1,6 +1,7 @@
 import express from 'express';
 import {nameCheck} from './validations/nameCheck.js';
-import {surnameCheck} from './validations/surnameCheck.js'
+import {surnameCheck} from './validations/surnameCheck.js';
+import {yearOfBirthCheck} from './validations/yearCheck.js'
 
 export const apiRouter = express.Router({mergeParams:true,});
 
@@ -48,12 +49,20 @@ apiRouter.post('/account', (req, res) => {
         });
 }
 const surnameError = surnameCheck(surname);
-if (nameError !== '') {
+if (surnameError !== '') {
     return res.json({
         status: 'error',
         message: surnameError,
     });
 }
+const yearOfBirthError = yearOfBirthCheck(yearOfBirth);
+if (yearOfBirthError !== '') {
+    return res.json({
+        status: 'error',
+        message: yearOfBirthError,
+    });
+}
+
 
 
 

@@ -1,29 +1,29 @@
 
-export function surnameCheck(str) {
+export function yearOfBirthCheck(str) {
 
     function textContainsOnlyAllowedSymbols(str, abc) {
         return str.split('').map(s => abc.includes(s)).every(x => x === true);
     }
     
-    function firstNonAllowedSymbol(str, abc) {
-        return str.split('').filter(s => !abc.includes(s))[0] ?? '';
-    }
-    const surnameMinSize = 2;
-    const surnameMaxSize = 20;
-    const surnameAllowedABC = 'aąbcčdeęėfghiįyjklmnoprsštuųūvzžAĄBCČDEĘĖFGHIĮYJKLMNOPRSŠTUŲŪVZŽ';
+    const date = new Date();
+    const y = date.getFullYear();
+    const m = (date.getMonth() < 9 ? '0' : '') + (date.getMonth() + 1);
+    const d = (date.getDate() < 10 ? '0' : '') + date.getDate();
+    const maxDate = `${y}-${m}-${d}`;
+
+    const yearOfBirthMinSize = 1900;
+    const yearOfBirthMaxSize = (date.getFullYear()-18);
+    const yearOfBirthAllowed = '0123456789';
     let errorMessage = '';
 
-    if (typeof str !== 'string') {
-        errorMessage = 'Trūksta vardo';
-    } else if (str.length < nameMinSize) {
-        errorMessage = `Vardas per trumpas, turi būti minimum ${surnameMinSize} raidės`;
-    } else if (str.length > nameMaxSize) {
-        errorMessage = `Vardas per ilgas, negali viršyti ${surnameMaxSize} raidžių`;
-    } else if (!textContainsOnlyAllowedSymbols(str, surnameAllowedABC)) {
-        errorMessage = `Varde rasta neleistina raidė "${firstNonAllowedSymbol(str, surnameAllowedABC)}"`;
-    } else if (str[0].toUpperCase() !== str[0]) {
-        errorMessage = `Vardas turi prasidėti didžiąja raide`;
+    if (typeof str !== 'number') {
+        errorMessage = 'Trūksta gimimo metų';
+    } else if (str < yearOfBirthMinSize) {
+        errorMessage = `Gimimo metai, turi būti ne ankstesni nei ${yearOfBirthMinSize}`;
+    } else if (str > yearOfBirthMaxSize) {
+        errorMessage = `Gimimo metai, turi būti ne vėlesni nei ${yearOfBirthMaxSize}`;
+    } else if (!textContainsOnlyAllowedSymbols(str, yearOfBirthAllowed)) {
+        errorMessage = `Gimimo metuose rasta neleistinas simbolis"${firstNonAllowedSymbol(str, yearOfBirthAllowed)}"`;
     }
-
     return errorMessage;
 }
