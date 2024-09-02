@@ -1,80 +1,115 @@
 import express from 'express';
+import { nameCheck } from '../validations/nameCheck.js'
+import {surnameCheck} from '../validations/surnameCheck.js';
+import {yearOfBirthCheck} from '../validations/yearCheck.js';
+import {monthOfBirthCheck} from '../validations/monthCheck.js';
+import {dayOfBirthCheck} from '../validations/dayCheck.js';
 
 
-export const apiRouter = express.Router({mergeParams:true,});
+export const apiRouterPost = express.Router();
 
+const users = [];
 
-
-apiRouter.post('/account', (req, res) => {
-    console.log(req.body.name)
+apiRouterPost.post('/', (req, res) => {
     const name = req.body.name;
     const surname = req.body.surname;
     const yearOfBirth = req.body.yearOfBirth;
     const monthOfBirth = req.body.monthOfBirth;
     const dayOfBirth = req.body.dayOfBirth;
-    
-        if(name === ''){
-            return res.json({
-                state: 'error',
-                message: 'Vardas turi būti įrašytas',
-            });
-        }
-        //TODO: Padaryti tikrinima visu esamu users
-        // if(name+surname === name+surname){
-        //     return res.json({
-        //         state: 'error',
-        //         message: 'Vardas ir pavardė jau užregistruoti, negali kartotis. ',
-        //     });
-        // }
+    const balance = req.body.balance;
+
+    if (typeof req.body !== 'object'
+        || Array.isArray(req.body)
+        || req.body === null) {
+        return res.json({
+            status: 'error',
+            message: 'Netinkamas duomenų tipas, turi būti objektas',
+        });
+}
+if (name === surname) {
+    errorMessage = 'Vardas ir pavardė negali sutapti';}
+// if ((name+'-'+surname) === (users.name+'-'+users.surname)) {
+//     return res.json({
+//         status: 'error',
+//         message:' Vartotojas jau yra užregistruotas',
+//     });
+
+// }
+    const nameError = nameCheck(name);
+    if (nameError !== '') {
+        return res.json({
+            status: 'error',
+            message: nameError,
+        });
+}
+const surnameError = surnameCheck(surname);
+if (surnameError !== '') {
+    return res.json({
+        status: 'error',
+        message: surnameError,
+    });
+}
+const yearOfBirthError = yearOfBirthCheck(yearOfBirth);
+if (yearOfBirthError !== '') {
+    return res.json({
+        status: 'error',
+        message: yearOfBirthError,
+    });
+}
+const monthOfBirthError = monthOfBirthCheck(monthOfBirth);
+if (monthOfBirthError !== '') {
+    return res.json({
+        status: 'error',
+        message: monthOfBirthError,
+    });
+}
+const dayOfBirthError = dayOfBirthCheck(dayOfBirth);
+if (dayOfBirthError !== '') {
+    return res.json({
+        status: 'error',
+        message: dayOfBirthError,
+    });
+}
+
+const date = new Date();
+const y = date.getFullYear();
+const m = (date.getMonth() < 9 ? '0' : '') + (date.getMonth() + 1);
+const d = date.getDate();
+// const alowedDay = (year, month) => new Date(year, month, 0).getDate(yearOfBirth, monthOfBirth);
+
         
-        if(surname === ''){
+// if(!alowedDay>dayOfBirth){
+//     return res.json({
+//         state: 'error',
+//         message: 'Mėnuo neturi tokios dienos.',
+//     });
+// }
+
+        if(yearOfBirth >= y-18 && monthOfBirth >= m && dayOfBirth> d){
             return res.json({
                 state: 'error',
-                message: 'Parardė turi būti įrašyta',
+                message: 'Nepilnametis negali susikurti sąskaitos banke',
             });
         }
-        if(yearOfBirth >= 2006){
+   
+
+        if (balance !== 0) {
             return res.json({
-                state: 'error',
-                message: 'Metai, kuriais gimė, asmuo negali būti sulaukęs pilnametystės',
+                status: 'error',
+                message: 'Sukuriant sąskaitą, sąskaitos balansas turi būti lygus 0',
             });
         }
-        if(monthOfBirth >= 8){
-            return res.json({
-                state: 'error',
-                message: 'Mėnuo, kurį gimė, asmuo negali būti sulaukęs pilnametystės',
-            });
-            
-        }
-    
-        if(dayOfBirth >= 28){
-            return res.json({
-                state: 'error',
-                message: 'Diena, kurią gimė, asmuo negali būti sulaukęs pilnametystės',
-            });
-        }
-            if(balance !== 0){
-                return res.json({
-                    state: 'error',
-                    message: 'Kurdami sąskaitą negalite iškart įnešti pinigų.',
-                });       
-        }
-    users.push(req.body);
-    // users[req.body.name+'-'+req.body.surname]=req.body;
+    users[req.body.name+'-'+req.body.surname]=req.body;
     console.log(JSON.stringify(users))
     console.log(req.body)
+    console.log(users)
     
-
-    //post - body
-
-    // get - params
-
-
- 
-   
     return res.json({
         state: 'success',
         message: 'Vardas, pavardė ir gimimo data pridėta.',
     });
 
 });
+
+    
+    
