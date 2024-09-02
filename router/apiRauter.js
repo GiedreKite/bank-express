@@ -163,12 +163,6 @@ apiRouter.get('/account/:name-:surname', (req, res) => {
     //  console.log(users[userName].name)
     console.log(users)
 
-    const nameObj = user.name;
-    const surnameObj = user.surname;
-    const yearOfBirthObj = user.yearOfBirth
-    const monthOfBirthObj = user.monthOfBirth
-    const dayOfBirthObj = user.dayOfBirth    
-    const balanceObj = user.balance;
 
       
     if (names[0] === userName) {
@@ -245,10 +239,40 @@ apiRouter.delete('/account/:name-:surname', (req, res) => {
         
     //post - body
 
+
+    apiRouter.get('/account/:name-:surname/:name', (req, res) => {
+        const name = req.body.name.toLowerCase();
+        const surname = req.body.surname.toLowerCase();
+        const userName = name+'-'+surname;
+        let user = null;
+    
+        for (const key in users) {
+   
+            if (key.toLowerCase() === userName.toLowerCase()) {
+                user = users[key];
+                console.log(user);
+                break;
+            }
+        }
+    
+            if (user === null) {
+            return res.json({
+                status: "error",
+                message: "Vartotojas nerastas."
+            });
+        }
+
+        return res.json({
+            state: 'success',
+            message: `Vartotojo vardas ${}`,
+        });
+
+    });
+
     apiRouter.put('/account/:name-:surname/name', (req, res) => {
         // const newName = req.body.newName
-        const name = req.params.name.toLowerCase();
-        const surname = req.params.surname.toLowerCase();
+        const name = req.body.name.toLowerCase();
+        const surname = req.body.surname.toLowerCase();
         const userName = name+'-'+surname;
 
         let index = null;
@@ -378,20 +402,20 @@ apiRouter.post('/deposit', (req, res) => {
     if (!("name" in req.body)) {
         return res.json({
             status: "error",
-            message: "Nepateiktrdas vardas."
+            message: "Nepateiktas vardas."
         });
     }
 
     if (!("surname" in req.body)) {
         return res.json({
             status: "error",
-            message: "Nepateiktrda pavardė."
+            message: "Nepateikta pavardė."
         });
     }
 
 
     
-    if (!("addMoney" in req.body) && req.body.addMoney <= 0) {
+    if (!("addMoney" in req.body) || req.body.addMoney <= 0) {
         return res.json({
             status: "error",
             message: "Nepateikta pinigų suma."
@@ -463,7 +487,7 @@ apiRouter.post('/withdrawal', (req, res) => {
 
 
     
-    if (!("withdrawMoney" in req.body) && req.body.withdrawMoney <= 0 && req.body.withdrawMoney < user.balance) {
+    if (!("withdrawMoney" in req.body) || req.body.withdrawMoney <= 0 || req.body.withdrawMoney < user.balance) {
         return res.json({
             status: "error",
             message: "Nepateikta tinkama pinigų suma."
@@ -566,7 +590,7 @@ apiRouter.post('/transfer', (req, res) => {
 
 
     
-    if (!("transfer" in req.body) && req.body.transfer <= 0 && req.body.transfer < user.balance) {
+    if (!("transfer" in req.body) || req.body.transfer <= 0 || req.body.transfer > user.balance) {
         return res.json({
             status: "error",
             message: "Nepateikta tinkama pinigų suma."
@@ -593,15 +617,20 @@ apiRouter.post('/transfer', (req, res) => {
             status: 'error',
             message: 'Netinkamas duomenų tipas, turi būti objektas',
         });
-}
+    }
+    console.log("T")
+    console.log(userReceiver)
+    console.log(user)
 user.balance-=req.body.transfer
 users[index]=user
 userReceiver.balance+=req.body.transfer
 users[indexReceiver]=userReceiver
    
+console.log(userReceiver)
+console.log(user)
 return res.json({
     state: 'success',
-    message: `Įnešta pinigų suma, jikutis s1skaitoje: ${user.balance/100} Eur.`,
+    message: `Įnešta pinigų suma, likutis sąskaitoje: ${user.balance/100} Eur.`,
 });
 
 

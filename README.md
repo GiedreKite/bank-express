@@ -89,37 +89,9 @@ Perduodami duomenys:
 gimimo data (yyyy-mm-dd)
 Atnaujina gimimo data
 
-/api/withdrawal
-POST
 
-Perduodami duomenys:
 
-pinigu kiekis
-saskaitos savininko vardas
-saskaitos savininko pavarde
-Is saskaitos isimami pinigai
 
-/api/deposit
-POST
-
-Perduodami duomenys:
-
-pinigu kiekis
-saskaitos savininko vardas
-saskaitos savininko pavarde
-I saskaita inesami pinigai
-
-/api/transfer
-POST
-
-Perduodami duomenys:
-
-is kurios saskaitos: vardas
-is kurios saskaitos: pavarde
-i kuria saskaita: vardas
-i kuria saskaita: pavarde
-pinigu kiekis
-Is vienos saskaitos isskaitomi pinigai ir iskaitomi i kita saskaita
 
 Vertinimas
 README (3 balai):
