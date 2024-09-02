@@ -7,6 +7,7 @@ import {dayOfBirthCheck} from './validations/dayCheck.js';
 import { apiRouterPost } from './api/post.js';
 import { users } from '../data/users.js';
 import { apiRouterGet } from './api/get.js';
+import { apiRouterDelete } from './api/delete.js';
 
 
 
@@ -16,6 +17,9 @@ export const apiRouter = express.Router();
 apiRouter.use('/account', apiRouterPost);
 
 apiRouter.use('/account', apiRouterGet);
+
+apiRouter.use('/account', apiRouterDelete);
+
 
 {users}
 apiRouter.get('/bank', (req, res) => {
@@ -31,53 +35,6 @@ apiRouter.get('/bank', (req, res) => {
 
 
 
-
-apiRouter.delete('/account/:name-:surname', (req, res) => {
-    const name = req.params.name.toLowerCase();
-    const surname = req.params.surname.toLowerCase();
-    const userName = name+'-'+surname;
-   
-   
-    let index = null;
-    let user = null;
-  
-
-
-    for (const key in users) {
-        if (key.toLowerCase() === userName.toLowerCase()) {
-            user = users[key];
-            index = key;
-            console.log(user);
-            break;
-        }
-    }
-
-    if (user === null) {
-        return res.json({
-            status: "error",
-            message: "Vartotojas nerastas."
-        });
-    }
-
-    const balanceObj = user.balance;
-    console.log(balanceObj);
-
-    if (balanceObj !== 0 ) {
-        return res.json({
-            state: 'error',
-            message: 'Sąskaitoje negali būti pinigų, jei norite ją ištrinti.',
-        });
-    }
-   
-
-    users.splice(index, 1);
-    delete users[index];
-
-    return res.json({
-        state: 'success',
-        message: 'Vartotojas ištrintas',
-    });
-});
 
 
 
