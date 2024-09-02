@@ -1,39 +1,11 @@
-Projektas nebaigtas, galite ir netikrinti, nes tai laiko gaišimas :D pasibaigsiu vėliau, nes klaidžioju, sunku man su put ir delete buvo, dabar atrodo jau pradėjau kapstytis, bet laiko nebeliko :D
-
-O jei tikrinti, tai tik apiRouter, nes kitur  - jovalas, kelnota, persigalvota ir pan, verta tikrai  :D
-
-
-Projektas bankas, kad jį pasileisti turite žinoti,  turi atitikti formatą: 
-
-Perduodami duomenys:
-(POST)
-{
-	"name": "Giedrė",
-	"surname": "Narvilaitė",
-	"yearOfBirth": 1988,
-	"monthOfBirth": 5,
-	"dayOfBirth": 12,
-	"balance":0
-	
-}
-
-
-Sukurti API naudojantis Express.js, kuris leistu susikurti banko saskaitas, i jas isinesti pinigu ir vykdyti pinigu pervedimus tarp saskaitu.
+Reikejo:
 
 Vienas asmuo gali tureti tik viena saskaita.
-
-Visi pinigu mainai vyksta centais.
-
-Visi pinigu "spausdinimai" vykdomi formatuojant teksta, pvz: 123,45 Eur.
-
-Uzklausu adresai neturi buti jautrus didziosioms/mazosioms raidems, t.y.
 
 
 POST
 
-/api/account
 vardo ir pavardes kombinacija turi buti unikali
-
 
 DELETE:
 
@@ -41,7 +13,6 @@ DELETE:
 Reikalavimai:
 
 istrinti galima tik jei saskaitoje nera pinigu
-
 PUT
 
 /api/account/john-doe
@@ -94,9 +65,37 @@ Perduodami duomenys:
 gimimo data (yyyy-mm-dd)
 Atnaujina gimimo data
 
+/api/withdrawal
+POST
 
+Perduodami duomenys:
 
+pinigu kiekis
+saskaitos savininko vardas
+saskaitos savininko pavarde
+Is saskaitos isimami pinigai
 
+/api/deposit
+POST
+
+Perduodami duomenys:
+
+pinigu kiekis
+saskaitos savininko vardas
+saskaitos savininko pavarde
+I saskaita inesami pinigai
+
+/api/transfer
+POST
+
+Perduodami duomenys:
+
+is kurios saskaitos: vardas
+is kurios saskaitos: pavarde
+i kuria saskaita: vardas
+i kuria saskaita: pavarde
+pinigu kiekis
+Is vienos saskaitos isskaitomi pinigai ir iskaitomi i kita saskaita
 
 Vertinimas
 README (3 balai):
@@ -112,8 +111,11 @@ Kiekvienas endpoint'as ir jo HTTP metodai yra verti po 5 balus:
 2 balas uz tinkamas validacijas (visas)
 1 balas uz URL
 1 balas uz gerai aprasyta dokumentacija README faile
-Deadline
-2024-09-02 12:00:00
+
+
+
+
+
 
 
 Reikejo:

@@ -443,7 +443,7 @@ users[index]=user
    
 return res.json({
     state: 'success',
-    message: `Įnešta pinigų suma, jikutis s1skaitoje: ${user.balance/100} Eur.`,
+    message: `Įnešta pinigų suma, likutis sąskaitoje: ${user.balance/100} Eur.`,
 });
 
 
@@ -515,7 +515,7 @@ users[index]=user
    
 return res.json({
     state: 'success',
-    message: `Įnešta pinigų suma, jikutis s1skaitoje: ${user.balance/100} Eur.`,
+    message: `Išimta pinigų suma, likutis sąskaitoje: ${user.balance/100} Eur.`,
 });
 
 
