@@ -4,11 +4,11 @@ import {surnameCheck} from '../validations/surnameCheck.js';
 import {yearOfBirthCheck} from '../validations/yearCheck.js';
 import {monthOfBirthCheck} from '../validations/monthCheck.js';
 import {dayOfBirthCheck} from '../validations/dayCheck.js';
-
+import { users } from '../../data/users.js';
 
 export const apiRouterPost = express.Router();
 
-const users = [];
+ {users} ;
 
 apiRouterPost.post('/', (req, res) => {
     const name = req.body.name;

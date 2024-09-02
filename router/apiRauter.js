@@ -5,13 +5,16 @@ import {yearOfBirthCheck} from './validations/yearCheck.js';
 import {monthOfBirthCheck} from './validations/monthCheck.js';
 import {dayOfBirthCheck} from './validations/dayCheck.js';
 import { apiRouterPost } from './api/post.js';
+import { users } from '../data/users.js';
+
+
 
 
 export const apiRouter = express.Router();
 
 apiRouter.use('/account', apiRouterPost);
 
-
+{users}
 apiRouter.get('/bank', (req, res) => {
     const data = {
         state: 'success',
@@ -21,7 +24,7 @@ apiRouter.get('/bank', (req, res) => {
 });
 
 
-const users = [];
+ 
 
 
 
