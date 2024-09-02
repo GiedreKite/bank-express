@@ -264,7 +264,7 @@ apiRouter.delete('/account/:name-:surname', (req, res) => {
 
         return res.json({
             state: 'success',
-            message: `Vartotojo vardas ${}`,
+            message: `Vartotojo vardas ${userName}`,
         });
 
     });
