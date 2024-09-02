@@ -100,9 +100,9 @@ const d = date.getDate();
             });
         }
     users[req.body.name+'-'+req.body.surname]=req.body;
-    console.log(JSON.stringify(users))
-    console.log(req.body)
-    console.log(users)
+    // console.log(JSON.stringify(users))
+    // console.log(req.body)
+    // console.log(users)
     
     return res.json({
         state: 'success',
