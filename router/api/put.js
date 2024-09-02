@@ -1,5 +1,6 @@
 import express from 'express';
+import { users } from '../../data/users.js';
 
+export const apiRouterPut = express.Router();
 
-export const apiRouter = express.Router({mergeParams:true,});
-
+ {users} ;

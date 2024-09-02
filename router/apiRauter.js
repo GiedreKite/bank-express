@@ -8,6 +8,8 @@ import { apiRouterPost } from './api/post.js';
 import { users } from '../data/users.js';
 import { apiRouterGet } from './api/get.js';
 import { apiRouterDelete } from './api/delete.js';
+import { apiRouterPostDeposit } from './api/postDeposit.js';
+// import { apiRouterGetName } from './api/getName.js';
 
 
 
@@ -19,6 +21,10 @@ apiRouter.use('/account', apiRouterPost);
 apiRouter.use('/account', apiRouterGet);
 
 apiRouter.use('/account', apiRouterDelete);
+
+apiRouter.use('/deposit', apiRouterPostDeposit)
+
+// apiRouter.use('/account', apiRouterGetName);
 
 
 {users}
@@ -49,35 +55,6 @@ apiRouter.get('/bank', (req, res) => {
         
     //post - body
 
-
-    apiRouter.get('/account/:name-:surname/:name', (req, res) => {
-        const name = req.body.name.toLowerCase();
-        const surname = req.body.surname.toLowerCase();
-        const userName = name+'-'+surname;
-        let user = null;
-    
-        for (const key in users) {
-   
-            if (key.toLowerCase() === userName.toLowerCase()) {
-                user = users[key];
-                console.log(user);
-                break;
-            }
-        }
-    
-            if (user === null) {
-            return res.json({
-                status: "error",
-                message: "Vartotojas nerastas."
-            });
-        }
-
-        return res.json({
-            state: 'success',
-            message: `Vartotojo vardas ${userName}`,
-        });
-
-    });
 
     apiRouter.put('/account/:name-:surname/name', (req, res) => {
         // const newName = req.body.newName
@@ -303,75 +280,6 @@ return res.send(`Vartotojo vardas pakeistas į ${nameObj}`);
   
 });
 
-apiRouter.post('/deposit', (req, res) => {
-
-    const name = req.body.name.toLowerCase();
-    const surname = req.body.surname.toLowerCase();
-    const userName = name+'-'+surname;
-
-    let index = null;
-    let user = null;
-  
-
- 
-
-    for (const key in users) {
-        if (key.toLowerCase() === userName.toLowerCase()) {
-            user = users[key];
-            index = key;
-            console.log(user);
-            break;
-        }
-    }
-    if (!("name" in req.body)) {
-        return res.json({
-            status: "error",
-            message: "Nepateiktas vardas."
-        });
-    }
-
-    if (!("surname" in req.body)) {
-        return res.json({
-            status: "error",
-            message: "Nepateikta pavardė."
-        });
-    }
-
-
-    
-    if (!("addMoney" in req.body) || req.body.addMoney <= 0) {
-        return res.json({
-            status: "error",
-            message: "Nepateikta pinigų suma."
-        });
-    }
-
-    if (user === null) {
-        return res.json({
-            status: "error",
-            message: "Vartotojas nerastas."
-        });
-    }
-
-    if (typeof req.body !== 'object'
-        || Array.isArray(req.body)
-        || req.body === null) {
-        return res.json({
-            status: 'error',
-            message: 'Netinkamas duomenų tipas, turi būti objektas',
-        });
-}
-user.balance+=req.body.addMoney
-users[index]=user
-
-   
-return res.json({
-    state: 'success',
-    message: `Įnešta pinigų suma, likutis sąskaitoje: ${user.balance/100} Eur.`,
-});
-
-
-})
 
 
 
