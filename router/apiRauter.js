@@ -531,15 +531,54 @@ apiRouter.post('/transfer', (req, res) => {
         });
     }
 
+    
+    const nameReceiver = req.body.nameReceiver.toLowerCase();
+    const surnameReceiver = req.body.surnameReceiver.toLowerCase();
+    const userNameReceiver = nameReceiver+'-'+surnameReceiver;
+
+    let indexReceiver = null;
+    let userReceiver = null;
+  
+
+ 
+
+    for (const key in users) {
+        if (key.toLowerCase() === userNameReceiver.toLowerCase()) {
+            userReceiver = users[key];
+            indexReceiver = key;
+            console.log(userReceiver);
+            break;
+        }
+    }
+    if (!("nameReceiver" in req.body)) {
+        return res.json({
+            status: "error",
+            message: "Nepateiktas vardas."
+        });
+    }
+
+    if (!("surnameReceiver" in req.body)) {
+        return res.json({
+            status: "error",
+            message: "Nepateiktas pavardė."
+        });
+    }
+
 
     
-    if (!("transfer" in req.body) && req.body.withdrawMoney <= 0 && req.body.withdrawMoney < user.balance) {
+    if (!("transfer" in req.body) && req.body.transfer <= 0 && req.body.transfer < user.balance) {
         return res.json({
             status: "error",
             message: "Nepateikta tinkama pinigų suma."
         });
     }
 
+    if (userReceiver === null) {
+        return res.json({
+            status: "error",
+            message: "Vartotojas gavėjas nerastas."
+        });
+    }
     if (user === null) {
         return res.json({
             status: "error",
@@ -555,9 +594,10 @@ apiRouter.post('/transfer', (req, res) => {
             message: 'Netinkamas duomenų tipas, turi būti objektas',
         });
 }
-user.balance-=req.body.withdrawMoney 
+user.balance-=req.body.transfer
 users[index]=user
-
+userReceiver.balance+=req.body.transfer
+users[indexReceiver]=userReceiver
    
 return res.json({
     state: 'success',
