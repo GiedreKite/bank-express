@@ -1,5 +1,7 @@
 Projektas nebaigtas, galite ir netikrinti, nes tai laiko gaišimas :D pasibaigsiu vėliau, nes klaidžioju, sunku man su put ir delete buvo, dabar atrodo jau pradėjau kapstytis, bet laiko nebeliko :D
 
+O jei tikrinti, tai tik apiRouter, nes kitur  - jovalas, kelnota, persigalvota ir pan, verta tikrai  :D
+
 
 Projektas bankas, kad jį pasileisti turite žinoti,  turi atitikti formatą: 
 
