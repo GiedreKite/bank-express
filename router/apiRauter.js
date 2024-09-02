@@ -9,6 +9,7 @@ import { users } from '../data/users.js';
 import { apiRouterGet } from './api/get.js';
 import { apiRouterDelete } from './api/delete.js';
 import { apiRouterPostDeposit } from './api/postDeposit.js';
+import { apiRouterPostWithdrow } from './api/postWithdraw.js';
 // import { apiRouterGetName } from './api/getName.js';
 
 
@@ -23,6 +24,8 @@ apiRouter.use('/account', apiRouterGet);
 apiRouter.use('/account', apiRouterDelete);
 
 apiRouter.use('/deposit', apiRouterPostDeposit)
+
+apiRouter.use('/withdrow', apiRouterPostWithdrow)
 
 // apiRouter.use('/account', apiRouterGetName);
 
@@ -281,89 +284,6 @@ return res.send(`Vartotojo vardas pakeistas į ${nameObj}`);
 });
 
 
-
-
-apiRouter.post('/withdrawal', (req, res) => {
-
-    const name = req.body.name.toLowerCase();
-    const surname = req.body.surname.toLowerCase();
-    const userName = name+'-'+surname;
-
-    let index = null;
-    let user = null;
-  
-
- 
-
-    for (const key in users) {
-        if (key.toLowerCase() === userName.toLowerCase()) {
-            user = users[key];
-            index = key;
-            console.log(user);
-            break;
-        }
-    }
-    if (!("name" in req.body)) {
-        return res.json({
-            status: "error",
-            message: "Nepateiktrdas vardas."
-        });
-    }
-
-    if (!("surname" in req.body)) {
-        return res.json({
-            status: "error",
-            message: "Nepateiktrda pavardė."
-        });
-    }
-
-
-    
-    if (!("withdrawMoney" in req.body)) {
-        return res.json({
-            status: "error",
-            message: "Nepateiktas išimamas kiekis."
-        });
-    }
-    if (req.body.withdrawMoney <= 0) {
-        return res.json({
-            status: "error",
-            message: "Nepateikta tinkama pinigų suma."
-        });
-    }
-    if (req.body.withdrawMoney > user.balance) {
-        return res.json({
-            status: "error",
-            message: "Negalima išimti daugiau nei yra sąskaitoje."
-        });
-    }
-
-    if (user === null) {
-        return res.json({
-            status: "error",
-            message: "Vartotojas nerastas."
-        });
-    }
-
-    if (typeof req.body !== 'object'
-        || Array.isArray(req.body)
-        || req.body === null) {
-        return res.json({
-            status: 'error',
-            message: 'Netinkamas duomenų tipas, turi būti objektas',
-        });
-}
-user.balance-=req.body.withdrawMoney 
-users[index]=user
-
-   
-return res.json({
-    state: 'success',
-    message: `Išimta pinigų suma, likutis sąskaitoje: ${user.balance/100} Eur.`,
-});
-
-
-})
 
 apiRouter.post('/transfer', (req, res) => {
 
