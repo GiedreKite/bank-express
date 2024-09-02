@@ -378,7 +378,7 @@ apiRouter.delete('/account/:name-:surname', (req, res) => {
     if(!("surname" in newSurname)) {
         return res.json({
             status: 'error', 
-            message: 'Vardas turi būti įrašytas'
+            message: 'Pavardė turi būti įrašytas'
     });
 }
     const surnameError = surnameCheck(newSurname['surname']);
@@ -394,7 +394,7 @@ const newYearOfBirth = req.body;
 if(!("yearOfBirth" in newYearOfBirth)) {
     return res.json({
         status: 'error', 
-        message: 'Vardas turi būti įrašytas'
+        message: 'Gimimo metai turi būti įrašyti'
 });
 }
 const yearOfBirthError = yearOfBirthCheck(newYearOfBirth['yearOfBirth']);
@@ -404,11 +404,39 @@ if (yearOfBirthError !== '') {
         message: yearOfBirthError,
     });
 }
-user.surname=newYearOfBirth['yearOfBirth'];
-    user.surname=newSurname['surname'];
+const newMonthOfBirth = req.body;
+if(!("monthOfBirth" in newMonthOfBirth)) {
+    return res.json({
+        status: 'error', 
+        message:  'Gimimo mėnuo turi būti įrašyti'
+});
+}
+const monthOfBirthError = monthOfBirthCheck(newMonthOfBirth['monthOfBirth']);
+if (monthOfBirthError !== '') {
+    return res.json({
+        status: 'error',
+        message: monthOfBirthError,
+    });
+}
 
-
-
+const newDayOfBirth = req.body;
+if(!("dayOfBirth" in newDayOfBirth)) {
+    return res.json({
+        status: 'error', 
+        message:  'Gimimo diena turi būti įrašyti'
+});
+}
+const dayOfBirthError = dayOfBirthCheck(newDayOfBirth['dayOfBirth']);
+if (dayOfBirthError !== '') {
+    return res.json({
+        status: 'error',
+        message: dayOfBirthError,
+    });
+}
+        user.dayOfBirth=newDayOfBirth['dayOfBirth'];
+        user.monthOfBirth=newMonthOfBirth['monthOfBirth'];
+        user.yearOfBirth=newYearOfBirth['yearOfBirth'];
+        user.surname=newSurname['surname'];
         user.name=newName['name'];
         users.splice(index, 1);
         delete users[index]
