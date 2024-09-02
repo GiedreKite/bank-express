@@ -487,10 +487,22 @@ apiRouter.post('/withdrawal', (req, res) => {
 
 
     
-    if (!("withdrawMoney" in req.body) || req.body.withdrawMoney <= 0 || req.body.withdrawMoney < user.balance) {
+    if (!("withdrawMoney" in req.body)) {
+        return res.json({
+            status: "error",
+            message: "Nepateiktas išimamas kiekis."
+        });
+    }
+    if (req.body.withdrawMoney <= 0) {
         return res.json({
             status: "error",
             message: "Nepateikta tinkama pinigų suma."
+        });
+    }
+    if (req.body.withdrawMoney > user.balance) {
+        return res.json({
+            status: "error",
+            message: "Negalima išimti daugiau nei yra sąskaitoje."
         });
     }
 
