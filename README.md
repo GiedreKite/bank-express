@@ -8,15 +8,6 @@ POST
 vardo ir pavardes kombinacija turi buti unikali
 
 
-PUT
-
-/api/account/john-doe
-Perduodami duomenys:
-
-vardas
-pavarde
-gimimo data (yyyy-mm-dd)
-Jei atnaujiname paskyrtos duomenis, tai siunciama visa informacija, t.y. nepakitusi ir pakitusi kartu.
 
 /api/account/name
 GET
